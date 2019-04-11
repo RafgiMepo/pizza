@@ -126,7 +126,6 @@ public class BureauDAO extends DAO<Bureau>{
                   
           }while(flag==0);
           b=new Bureau(new_id,new_Sigle,new_tel);
-        
     }
     
     /**
