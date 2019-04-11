@@ -29,7 +29,6 @@ public class BureauDAO extends DAO<Bureau>{
         bur.menu();
    
 }
-
     /**
      *
      * @throws SQLException
@@ -88,7 +87,6 @@ public class BureauDAO extends DAO<Bureau>{
     
     DBconnect.closeConnection();
 }
-
     /**
      * méthode pour ajouter un nouveau bureau, je récupère mes éléments, je demande les caractéristiques du nouveau bureau et les compares avec ma base, si ce n'est pas dans la base on l'ajoute
      * @throws SQLException
