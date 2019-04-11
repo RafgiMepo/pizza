@@ -82,7 +82,6 @@ public class BureauDAO extends DAO<Bureau>{
                 break;
         }
         
-        
     }while(choix!=5);
     
     DBconnect.closeConnection();
