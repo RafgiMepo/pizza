@@ -99,7 +99,6 @@ public class BureauDAO extends DAO<Bureau>{
          System.exit(1);
     }
           do{
-              
               flag=1;
               stmt=dbConnect.createStatement();
               rs=stmt.executeQuery("Select * FROM bureau");
