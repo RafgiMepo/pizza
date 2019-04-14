@@ -63,7 +63,7 @@ public class BureauDAO extends DAO<Bureau>{
                 nouveau();
                 create(b);
                 break;
-                
+            //modifier dans le menu car petit code qui nécessite pas nécessairement une méthode en plus    
             case 3:
                 int idmodif;
                 
@@ -82,7 +82,7 @@ public class BureauDAO extends DAO<Bureau>{
                 update(b);
                 System.out.println("La modification est effectuée");
                 break;
-            
+            // A obtenu de l'aide d'Alan Louis pour la fonction supprimé 
             case 4:
                 int idsup,flag=0;
                 System.out.println("Quel est l'id du bureau à supprimer ?");
@@ -171,60 +171,6 @@ public class BureauDAO extends DAO<Bureau>{
           b=new Bureau(new_id,new_Sigle,new_tel);
     }
     
-    /**
-     * méthode modifier
-     */
-   /* public void modif() throws SQLException{
-        int flag,id_mod;
-        String new_sigle,new_tel;
-        
-        Scanner sc= new Scanner(System.in);
-        Scanner sc2=new Scanner(System.in);
-        
-        Connection dbConnect=DBconnect.getConnection();
-         if(dbConnect==null){
-             System.exit(1);
-          }
-        
-         do{
-              flag=1;
-             
-              stmt=dbConnect.createStatement();
-              rs=stmt.executeQuery("Select * FROM bureau");
-              System.out.println("id du bureau à modifier?");
-              id_mod=sc.nextInt();
-              
-               System.out.println("Nouveau Sigle ?");
-               new_sigle=sc2.nextLine();
-               System.out.println("Nouveau tel ?");
-               new_tel=sc2.nextLine();
-                  
-              while(rs.next()){
-                 
-                 int idbur=rs.getInt("ID_BUR");
-                 String sig=rs.getString("Sigle");
-                 String phone=rs.getString("Tel");
-                 
-                 if((id_mod==idbur)){
-                    flag=0;
-                    break;
-                  }
-              }
-              if(flag==0){
-      
-                  String sql = "UPDATE Bureau SET id_bur=?, Sigle=?, Tel=? WHERE idbur=?";
-                  PreparedStatement statement=dbConnect.prepareStatement(sql);
-                  statement.setString(1, "id_mod");
-                  statement.setString(2, "new_sig");
-                  statement.setString(3, "new_tel");
-              }
-              else {
-                  System.out.println("id bureau non trouvé");
-              }               
-          }while(flag==1);
-               
-    }
-    */
    
     /**
      *
@@ -339,7 +285,7 @@ public class BureauDAO extends DAO<Bureau>{
     }
 
     /**
-     *
+     * effacement de la ligne de l'id du bureau selectionné 
      * @param obj
      * @throws SQLException
      */
