@@ -230,7 +230,7 @@ public class BureauDAO extends DAO<Bureau>{
             int n=ps.executeUpdate();
             
             if (n==0) {
-                throw new SQLException("erreur de creation client, aucune ligne créée");
+                throw new SQLException("erreur de creation bureau, aucune ligne créée");
             }
            
             ps2.setString(1, obj.getSigle());
@@ -242,7 +242,7 @@ public class BureauDAO extends DAO<Bureau>{
                     obj.setIdbur(Idbur);
                     return read(Idbur);
                 } else {
-                    throw new SQLException("erreur de création client, record introuvable");
+                    throw new SQLException("erreur de création bureau, record introuvable");
                 }
             }
         }
