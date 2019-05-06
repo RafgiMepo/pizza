@@ -10,7 +10,6 @@ import messagerie.metier.Employe;
 import myconnections.DBconnect;
 
 
-
 public class EmployeDAO extends DAO<Employe> {
     
     Employe e;
