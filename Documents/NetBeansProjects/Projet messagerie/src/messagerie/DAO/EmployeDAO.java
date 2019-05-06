@@ -176,8 +176,31 @@ public class EmployeDAO extends DAO<Employe> {
     }
 
     @Override
-    public Employe read(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public Employe read(int ide) throws SQLException {
+        Connection dbConnect=DBconnect.getConnection();
+            if(dbConnect==null){
+            System.exit(1);
+            }
+        String requete="select * from Employe where id_emp=?";
+         try (PreparedStatement ps=dbConnect.prepareStatement(requete)) {
+
+            ps.setInt(1, ide);
+            try (ResultSet rs=ps.executeQuery()) {
+                if (rs.next()) {
+                    int id_emp=rs.getInt("id_emp");
+                    String matricule=rs.getString("Matricule");
+                    String nom=rs.getString("Nom");
+                    String prenom=rs.getString("Prenom");
+                    int id_bur=rs.getInt("id_bur");
+                    System.out.println(matricule+"  "+nom+""+prenom+""+id_bur);
+                    return new Employe(id_emp, matricule, nom, prenom,id_bur);
+
+                } else {
+                    throw new SQLException("Code inconnu");
+                }
+
+            }
+        }
     }
 
     @Override
@@ -223,12 +246,57 @@ public class EmployeDAO extends DAO<Employe> {
 
     @Override
     public Employe update(Employe obj) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection dbConnect=DBconnect.getConnection();
+            if(dbConnect==null){
+              System.exit(1);
+            }
+     String Nmat,Nnom,Nprenom;
+     int Nid_bur;
+     
+     Scanner sc= new Scanner(System.in);
+     String requete="update Employe set Matricule=?,Nom=?,prenom=?,id_bur=? where id_emp=?";
+     try (PreparedStatement ps=dbConnect.prepareStatement(requete)) {
+
+           System.out.println("Nouveau matricule ?");
+           Nmat=sc.nextLine();
+           System.out.println("Nouveau nom ?");
+           Nnom=sc.nextLine();
+           System.out.println("Nouveau prenom ? ");
+           Nprenom=sc.nextLine();
+           System.out.println("Nouveau id bureau ? ");
+           Nid_bur=sc.nextInt();
+           
+            ps.setInt(5, obj.getId_emp());
+            ps.setString(1, Nmat);
+            ps.setString(2, Nnom);
+            ps.setString(3, Nprenom);
+            ps.setInt(4, Nid_bur);
+            
+            int n=ps.executeUpdate();
+            if (n==0) {
+                throw new SQLException("aucune ligne employe mise à jour");
+            }
+            return read(obj.getId_emp());
+        }   
     }
 
     @Override
     public void delete(Employe obj) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+     
+        Connection dbConnect=DBconnect.getConnection();
+            if(dbConnect==null){
+              System.exit(1);
+            }
+       String sql = "DELETE FROM Employe WHERE id_emp=?";
+       PreparedStatement stmt=dbConnect.prepareStatement(sql);
+        stmt.setInt(1,obj.getId_emp());
+ 
+
+       int rowsDeleted = stmt.executeUpdate();
+       if (rowsDeleted==0) {
+                throw new SQLException("aucune ligne employe effacée");
+            }
+    } 
+    
 
 }
