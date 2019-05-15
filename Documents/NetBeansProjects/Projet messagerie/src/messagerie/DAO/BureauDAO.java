@@ -18,7 +18,6 @@ public class BureauDAO extends DAO<Bureau>{
   int new_id,bursup;
   Bureau b;
   String Sigle, Tel;
-  
     /**
      *
      * @param args
