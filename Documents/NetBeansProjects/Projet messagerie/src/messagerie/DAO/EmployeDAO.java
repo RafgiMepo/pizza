@@ -192,6 +192,7 @@ public class EmployeDAO extends DAO<Employe> {
                     String nom=rs.getString("Nom");
                     String prenom=rs.getString("Prenom");
                     int id_bur=rs.getInt("id_bur");
+                    
                     System.out.println(matricule+"  "+nom+""+prenom+""+id_bur);
                     return new Employe(id_emp, matricule, nom, prenom,id_bur);
 
