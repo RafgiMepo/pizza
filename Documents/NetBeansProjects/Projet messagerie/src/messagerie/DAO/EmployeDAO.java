@@ -143,9 +143,10 @@ public class EmployeDAO extends DAO<Employe> {
           do{
               flag=1;
               stmt=dbConnect.createStatement();
+              rs=stmt.executeQuery("Select * FROM employe ORDER BY id_emp DESC");
+              rs.next();
+              new_id=rs.getInt(id_emp)+1;
               rs=stmt.executeQuery("Select * FROM employe");
-              System.out.println("Nouveau id de l'employe ?");
-              new_id=sc.nextInt();
               System.out.println("Nouveau matricule ?");
               new_matricule=sc2.nextLine();
               System.out.println("Nouveau nom ?");
@@ -193,7 +194,7 @@ public class EmployeDAO extends DAO<Employe> {
                     String prenom=rs.getString("Prenom");
                     int id_bur=rs.getInt("id_bur");
                     
-                    System.out.println(matricule+"  "+nom+""+prenom+""+id_bur);
+                    System.out.println(matricule+"  "+nom+" "+prenom+" "+id_bur);
                     return new Employe(id_emp, matricule, nom, prenom,id_bur);
 
                 } else {
@@ -212,7 +213,7 @@ public class EmployeDAO extends DAO<Employe> {
             System.exit(1);
             }
         String req1="insert into Employe(id_emp,matricule,nom,prenom,id_bur) values(?,?,?,?,?)";
-        String req2="select id_emp from Employe where matricule=?, nom=?, prenom=? and id_bur=?";
+        String req2="select id_emp from Employe where matricule=? and id_bur=?";
         
         try (PreparedStatement ps=dbConnect.prepareStatement(req1);
              PreparedStatement ps2=dbConnect.prepareStatement(req2)) {
@@ -229,9 +230,7 @@ public class EmployeDAO extends DAO<Employe> {
             }
            
             ps2.setString(1, obj.getMatricule());
-            ps2.setString(2, obj.getNom());
-            ps2.setString(3, obj.getPrenom());
-            ps2.setInt(4, obj.getId_bur());
+            ps2.setInt(2, obj.getId_bur());
             
             try (ResultSet rs=ps2.executeQuery()) {
                 if (rs.next()) {
@@ -258,20 +257,20 @@ public class EmployeDAO extends DAO<Employe> {
      String requete="update Employe set Matricule=?,Nom=?,prenom=?,id_bur=? where id_emp=?";
      try (PreparedStatement ps=dbConnect.prepareStatement(requete)) {
 
-           System.out.println("Nouveau matricule ?");
+        /*   System.out.println("Nouveau matricule ?");
            Nmat=sc.nextLine();
            System.out.println("Nouveau nom ?");
            Nnom=sc.nextLine();
            System.out.println("Nouveau prenom ? ");
            Nprenom=sc.nextLine();
            System.out.println("Nouveau id bureau ? ");
-           Nid_bur=sc.nextInt();
+           Nid_bur=sc.nextInt();*/
            
             ps.setInt(5, obj.getId_emp());
-            ps.setString(1, Nmat);
-            ps.setString(2, Nnom);
-            ps.setString(3, Nprenom);
-            ps.setInt(4, Nid_bur);
+            ps.setString(1, obj.getMatricule());
+            ps.setString(2, obj.getNom());
+            ps.setString(3, obj.getPrenom());
+            ps.setInt(4, obj.getId_bur());
             
             int n=ps.executeUpdate();
             if (n==0) {

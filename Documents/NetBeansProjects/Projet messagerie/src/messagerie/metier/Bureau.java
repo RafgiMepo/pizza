@@ -9,12 +9,14 @@ public class Bureau {
     protected int idbur;
     protected String sigle;
     protected String tel; 
+    protected String description;
 
 
-public Bureau(int idbur, String sigle, String tel){
+public Bureau(int idbur, String sigle, String tel, String description){
     this.idbur=idbur;
     this.sigle=sigle;
     this.tel=tel;
+    this.description=description;
 }
 
     public int getidbur() {
@@ -39,5 +41,11 @@ public Bureau(int idbur, String sigle, String tel){
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+    public void setDescription(String description){
+        this.description=description;
+    }
+    public String getDescription(){
+        return description;
     }
 }
