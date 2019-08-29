@@ -1,0 +1,28 @@
+<?php
+class CommandeDB extends Commande {
+    private $_db;
+    private $_array = array();
+    
+    public function __construct($db){
+        $this->_db = $db;
+    }
+    
+    public function ajoutCommande($nom,$prenom, $tel, $adresse, $id_pizza, $nbr_pizza){
+        try{
+            $query = "insert into commande(nom, prenom, tel, adresse, id_pizza, nbr_pizza)values(:nom, :prenom, :tel, :adresse, :id_pizza, :nbr_pizza)";
+            $resultset = $this->_db->prepare($query);
+            $resultset->bindValue(':nom',$nom);
+            $resultset->bindValue(':prenom',$prenom);
+            $resultset->bindValue(':tel',$tel);
+            $resultset->bindValue(':adresse',$adresse);
+            $resultset->bindValue(':id_pizza',$id_pizza);
+            $resultset->bindValue(':nbr_pizza',$nbr_pizza);
+            
+            $resultset->execute();
+            return 1;           
+        }
+        catch(PDOException $e){
+            print $e->getMessage(); 
+        }
+    }
+}

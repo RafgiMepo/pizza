@@ -1,0 +1,64 @@
+
+.ecriture {
+  color: white;
+  font-family: Broadway;
+}
+
+body{
+    background-color: black;
+    display: block;
+    color: white;
+  
+}
+.red{
+    background-color: red;
+}
+
+#myCarousel{
+    margin-left:auto;
+    margin-right:auto;
+}
+.active {
+    color:red;
+}
+
+legend{
+    
+    color:white;
+}
+fieldset{
+    color:white;
+    text-align: left;
+}
+.colorbd{
+    color: #E6FE40;
+    
+}
+
+.table-responsive{
+    
+    background-image: url('../../admin/images/fond.jpg');
+}
+
+
+.design-connect{
+    background-image: url('../../admin/images/images.jpg');
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center center;
+    margin-bottom: 150px;
+    margin-right: 150px;
+    margin-left : 150px;
+    text-align : center; 
+   
+}
+
+.design-inscrip{
+     
+    background-image: url('../../admin/images/pizzapai.png');  
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center center; 
+    color: white;
+    text-align : center; 
+}

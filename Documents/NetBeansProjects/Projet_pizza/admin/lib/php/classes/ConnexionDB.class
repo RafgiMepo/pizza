@@ -1,0 +1,58 @@
+<?php
+
+class ConnexionDB extends Connexion1 {
+    private $_db;
+    private $_array = array();
+    
+    public function __construct($db){
+        $this->_db = $db;
+    }
+    
+    public function getConnexion1($pseudo,$mdp){
+        try{
+            $query = "select pseudo,mdp from utilisateurs(pseudo,mdp) values (:pseudo,:mdp)";
+            $resultset = $this->_db->prepare($query);
+            $resultset->bindValue(':pseudo',$pseudo);
+            $resultset->bindValue(':mdp',$mdp);
+            $resultset->execute();
+            return 1;
+            
+        }
+        catch(PDOException $e){
+            print $e->getMessage(); 
+        }
+    }
+  / 
+    public function getPseudo($pseudo, $mdp){
+         try{
+            $query = "select pseudo from utilisateur where pseudo=:pseudo and mdp=:mdp";
+            $resultset = $this->_db->prepare($query);
+            $resultset->bindValue(':pseudo',$pseudo);
+            $resultset->bindValue(':mdp',$mdp);
+            $resultset->execute();
+            $id = $resultset->fetch()[0];
+        }
+        catch(PDOException $e){
+            print $e->getMessage(); 
+        }   
+        return $id;
+        
+    }
+    /*
+    public function getMdp($mdp){
+         try{
+            $query = "select mdp from utilisateur where mdp=:mdp";
+            $resultset = $this->_db->prepare($query);
+            $resultset->bindValue(':mdp',$mdp);
+            $resultset->execute();
+            $login = $resultset->fetch()[0]; 
+            
+        }
+        catch(PDOException $e){
+            print $e->getMessage(); 
+        }
+        
+        return $login;
+    }
+}
+*/
